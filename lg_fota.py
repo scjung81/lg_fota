@@ -12,3 +12,4 @@ lg_fota_send_mail()
 from sendMail import *
 sendMail(title="lg_fota end ", text="")
 
+#test
