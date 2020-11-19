@@ -1,4 +1,4 @@
-#git에소 추가
+#git에소 추가1
 
 from lg_fota_get_data_from_mail import lg_fota_get_data
 from lg_fota_send_mail import lg_fota_send_mail
