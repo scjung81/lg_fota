@@ -235,7 +235,7 @@ def lg_fota_get_data():
 
     def getNew_plm_sw():
         #마지막 폴더 찾기
-        filepath = os.path.abspath('..') + "\\PLM_Crawling\\crawling\\data"
+        filepath = os.path.abspath('..') + "\\plm_selenium\\crawling\\data"
         lastdate = max([filepath +"/"+ f for f in os.listdir(filepath)], key=os.path.getctime)
         print(lastdate)
 
