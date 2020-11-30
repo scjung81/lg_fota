@@ -1,4 +1,6 @@
 *.png
 data/
 .idea/
+rtcp/__pycache__/
+venv/
 
