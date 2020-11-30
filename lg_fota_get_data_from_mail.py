@@ -58,8 +58,8 @@ def lg_fota_get_data():
     import os
     import sys
 
-    # if not os.path.exists(os.path.join(os.getcwd(), "data")):
-    #     os.makedirs(os.path.join(os.getcwd(), "data"))
+    if not os.path.exists(os.path.join(os.getcwd(), "data")):
+        os.makedirs(os.path.join(os.getcwd(), "data"))
 
     from connection_info import get_connection_info
 
