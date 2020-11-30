@@ -248,8 +248,16 @@ def lg_fota_send_mail():
                                    ("text-align", "center")])
     ]
 
-    username = "sdqiskt@gmail.com"
-    password = 'chzqaozxqohquxfp'
+    from connection_info import get_connection_info
+
+    # Your IMAP Settings
+
+    smtp_host = get_connection_info("gmail_smtp_host")
+    username = get_connection_info("gmail_user")
+    password = get_connection_info("gmail_pw")
+
+    # username = "sdqiskt@gmail.com"
+    # password = 'chzqaozxqohquxfp'
     sender = username
 
     images = list()
@@ -336,7 +344,7 @@ def lg_fota_send_mail():
                 files.append(lg_fota_recent_fname)
                 print("files: ", files)
 
-            mail_sender = MailSender(username, password)
+            mail_sender = MailSender(username, password, server=smtp_host)
 
             if __name__ == "__main__":
                 # 테스트 메일 #Jupyter 노트 북 또는 개별 모듈 실행시
