@@ -256,8 +256,6 @@ def lg_fota_send_mail():
     username = get_connection_info("gmail_user")
     password = get_connection_info("gmail_pw")
 
-    # username = "sdqiskt@gmail.com"
-    # password = 'chzqaozxqohquxfp'
     sender = username
 
     images = list()
