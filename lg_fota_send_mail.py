@@ -358,7 +358,7 @@ def lg_fota_send_mail():
 
             else:
                 # Teams 공유 메일 주소
-                mail_sender.send(sender, ["jungil.kwon@sktelecom.com", "kwac@sktelecom.com",
+                mail_sender.send(sender, ["jungil.kwon@sktelecom.com", "kwac@sktelecom.com", "sukchan.jung@sktelecom.com", "chris.mclee@sktelecom.com",
                                           "9164c98a.o365skt.onmicrosoft.com@apac.teams.ms"],
                                  'LG FOTA 연동 현황 ({}/{})'.format(page, total_page), message_html=message_html,
                                  message_plain=message_plain, images=images,
