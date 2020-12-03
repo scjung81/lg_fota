@@ -1,17 +1,14 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
 def lg_fota_get_data():
 
     import smtplib
     import imaplib
     import email
     from email.mime.text import MIMEText
-
-
-    # In[2]:
+    import pandas as pd
+    import shutil
 
 
     from datetime import datetime, timedelta
@@ -44,8 +41,6 @@ def lg_fota_get_data():
     print(today, yesterday)
 
 
-    # In[3]:
-
 
     from email.header import decode_header
 
@@ -66,11 +61,13 @@ def lg_fota_get_data():
     if not os.path.exists(os.path.join(os.getcwd(), "data")):
         os.makedirs(os.path.join(os.getcwd(), "data"))
 
+    from connection_info import get_connection_info
+
     # Your IMAP Settings
 
-    host = 'imap.gmail.com'
-    user = "sdqiskt@gmail.com"
-    password = 'chzqaozxqohquxfp'
+    host = get_connection_info("gmail_imap_host")
+    user = get_connection_info("gmail_user")
+    password = get_connection_info("gmail_pw")
 
     # Connect to the server
     print('Connecting to ' + host)
@@ -134,26 +131,7 @@ def lg_fota_get_data():
     mailBox.logout()
 
 
-    # In[ ]:
 
-
-
-
-
-    # In[4]:
-
-
-    import pandas as pd
-    import shutil
-
-
-    # In[ ]:
-
-
-
-
-
-    # In[5]:
 
 
     # print(os.listdir("data/"))
@@ -182,8 +160,6 @@ def lg_fota_get_data():
     file_list = get_raw_data()
     file_list
 
-
-    # In[6]:
 
 
     # 행 전개를 열전개로 변환
@@ -220,8 +196,6 @@ def lg_fota_get_data():
     df_all
 
 
-    # In[7]:
-
 
     ver = df_all['VERSION'].str.split('-')
     df_all["ap"]  = ver.str[1]
@@ -248,20 +222,9 @@ def lg_fota_get_data():
     df_all = df_all.loc[df_all["Date"] >= dayago_90]
 
 
-    # In[ ]:
-
-
-
-
-
-    # In[8]:
-
 
 
     df_all = df_all.sort_values(by=["MODEL", "ap"])
-
-
-    # In[ ]:
 
 
 
@@ -269,11 +232,10 @@ def lg_fota_get_data():
 
     # # PLM 정보 통합
 
-    # In[9]:
 
     def getNew_plm_sw():
         #마지막 폴더 찾기
-        filepath = os.path.abspath('..') + "\\PLM_Crawling\\crawling\\data"
+        filepath = os.path.abspath('..') + "\\plm_selenium\\crawling\\data"
         lastdate = max([filepath +"/"+ f for f in os.listdir(filepath)], key=os.path.getctime)
         print(lastdate)
 
@@ -287,35 +249,26 @@ def lg_fota_get_data():
     plm_sw.head()
 
 
-    # In[10]:
-
 
     col = ['manufacturer', 'pet_name', 'model', 'ua_model', 'ua_ver', 'ue_type', 'acceptance_date', 'release_sw', 'ongoing', 'release_type', 'os_type', 'os_ver', 'codeName']
     plm_sw= plm_sw.loc[plm_sw['manufacturer']=='LG전자', col]
     plm_sw.tail()
 
 
-    # In[11]:
 
 
     a1 = pd.merge(df_all, plm_sw, left_on=['MODEL', 'ua_ver'], right_on=['model', 'ua_ver'], how='inner' )  #PLM 에 없는 Data 는 제거
 
-
-    # In[12]:
 
 
     lg_fota_final = pd.concat([a1]).sort_values(by=["MODEL", "ap"])
     lg_fota_final
 
 
-    # In[13]:
-
 
     lg_fota_final['Lable'] = lg_fota_final['ap'] + "(" + lg_fota_final['acceptance_date'] + ")"
     lg_fota_final[['Lable', 'acceptance_date', 'First Open Date']]
 
-
-    # In[16]:
 
 
     lastdate = lg_fota_final["Date"].max().strftime("%Y%m%d")
@@ -327,8 +280,6 @@ def lg_fota_get_data():
 
     lg_fota_final.to_csv(fname, encoding='euc-kr', index=False)
 
-
-    # In[17]:
 
 
     #최근 결과 #하루전 Data와 통합
@@ -363,10 +314,6 @@ def lg_fota_get_data():
     lg_fota_recent_fname  = 'data/'+lastdate+"/lg_fota_recent_" + lastdate + ".csv"
     lg_fota_recent.to_csv(lg_fota_recent_fname, encoding='euc-kr', index=False)
     lg_fota_recent
-
-
-    # In[18]:
-
 
     print("Complete getting lg fota data form email ")
 
