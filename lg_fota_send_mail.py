@@ -15,7 +15,7 @@ def lg_fota_send_mail():
     import time
 
     #메일에 포함될 단말 모델명
-    model_lists = [["LM-V500N", 'LM-V510N'], ["LM-G900N", "LM-Q920N", "LM-F100N"]]
+    model_lists = [["LM-V500N"], ['LM-V510N'], ["LM-G900N", "LM-Q920N", "LM-F100N"]]
     model_list = [element for array in model_lists for element in array]
 
     print(os.listdir("./data/"))
