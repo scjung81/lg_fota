@@ -3,7 +3,7 @@
 
 # In[ ]:
 
-def lg_fota_send_mail():
+def lg_fota_send_mail(recevier_list):
     import os
 
     print(os.getcwd())
@@ -348,8 +348,7 @@ def lg_fota_send_mail():
             if __name__ == "__main__":
                 # 테스트 메일 #Jupyter 노트 북 또는 개별 모듈 실행시
                 print("테스트 메일")
-                mail_sender.send(sender,
-                                 ["jungil.kwon@sktelecom.com", "58fc60be.o365skt.onmicrosoft.com@apac.teams.ms"],
+                mail_sender.send(sender, 'sukchan.jung@sktelecom.com',
                                  'LG FOTA 연동 현황 ({}/{})'.format(page, total_page), message_html=message_html,
                                  message_plain=message_plain, images=images, files=files)
 
@@ -358,8 +357,7 @@ def lg_fota_send_mail():
 
             else:
                 # Teams 공유 메일 주소
-                mail_sender.send(sender, ["jungil.kwon@sktelecom.com", "kwac@sktelecom.com", "sukchan.jung@sktelecom.com", "chris.mclee@sktelecom.com",
-                                          "9164c98a.o365skt.onmicrosoft.com@apac.teams.ms"],
+                mail_sender.send(sender, recevier_list,
                                  'LG FOTA 연동 현황 ({}/{})'.format(page, total_page), message_html=message_html,
                                  message_plain=message_plain, images=images,
                                  files=files)
