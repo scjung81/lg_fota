@@ -8,9 +8,9 @@ lg_fota_get_data()  # Mail 서버 접속하여 LG FOTA 메일 다운로드 및 �
 # test시 주석처리 필요
 
 recevier_list = ["sukchan.jung@sktelecom.com", 'ywhan@sktelecom.com', 'jaehyun.ryu@sktelecom.com',
-                 'jbmoon@sktelecom.com', 'jtchoi20@sktelecom.com', 'hslim07@sktelecom.com',
-                 'chris.mclee@sktelecom.com', 'sangyhan@sktelecom.com', 'jaehyun99.kim@sktelecom.com',
-                 'jiyoun_choi@sktelecom.com', 'jongkeunjung@sktelecom.com',
+                 'jbmoon@sktelecom.com', 'jtchoi20@sktelecom.com', 'chris.mclee@sktelecom.com',
+                 'jiyoun_choi@sktelecom.com', 'byungjo.min@sktelecom.com',
+                 'jongkeunjung@sktelecom.com',
                  "9164c98a.o365skt.onmicrosoft.com@apac.teams.ms"]
 recevier_list_test = ["58fc60be.o365skt.onmicrosoft.com@apac.teams.ms", "sukchan.jung@sktelecom.com"]
 
